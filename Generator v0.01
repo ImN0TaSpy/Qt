@@ -1,0 +1,44 @@
+from PyQt5 import QtWidgets
+from PyQt5.QtWidgets import *
+import sys
+import string
+import random
+
+
+class MyWindow(QMainWindow):
+    def __init__(self):
+        super(MyWindow,self).__init__()
+        self.setGeometry(250, 700, 700, 250)
+        self.setWindowTitle("IM NOT A SPY")
+        self.initUI()
+
+    def initUI(self):
+        self.textedit = QTextEdit(self)
+        self.textedit.move(5,20)
+        self.textedit.setFixedSize(690,30)
+
+
+        self.label = QtWidgets.QLabel(self)
+        self.label.setText("my first text")
+        self.label.move(50, 50)
+
+        self.b1 = QtWidgets.QPushButton(self)
+        self.b1.move(540,200)
+        self.b1.setText("Generate")
+        self.b1.clicked.connect(self.clicked)
+
+    def clicked(self):
+        self.x = string.ascii_letters
+        self.x = ''.join(random.sample(self.x, 32))
+        self.textedit.setText(self.x)
+
+
+
+
+def window():
+    app = QApplication(sys.argv)
+    win = MyWindow()
+    win.show()
+    sys.exit(app.exec())
+
+window()
